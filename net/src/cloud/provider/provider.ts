@@ -47,23 +47,15 @@ class CloudProvider {
         }
     }
 
-    private async _sendExternalMessageBase64 (base64: string): Promise<void> {
+    public async sendExternalMessageBase64 (base64: string): Promise<void> {
         const cell = BOC.fromStandard(base64)
         const hash = Utils.Helpers.bytesToBase64(Utils.Helpers.hexToBytes(cell.hash()))
         return this._sendExtMsg(hash, base64)
     }
 
-    private async _sendExternalMessageCell (cell: Cell): Promise<void> {
+    public async sendExternalMessageCell (cell: Cell): Promise<void> {
         const hash = Utils.Helpers.bytesToBase64(Utils.Helpers.hexToBytes(cell.hash()))
         return this._sendExtMsg(hash, BOC.toBase64Standard(cell))
-    }
-
-    public async sendExternalMessage (base64: string): Promise<void>
-    public async sendExternalMessage (cell: Cell): Promise<void>
-    public async sendExternalMessage (cell: string | Cell): Promise<void> {
-        if (cell instanceof Cell) return this._sendExternalMessageCell(cell)
-        if (typeof cell === 'string') return this._sendExternalMessageBase64(cell)
-        throw new Error('CloudProvider: sendExternalMessage accepts only Cell or base64 BOC')
     }
 }
 

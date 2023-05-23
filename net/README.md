@@ -22,7 +22,7 @@ async function main () {
     })
 
     const c = new Builder().cell()
-    await provider.sendExternalMessage(c)
+    await provider.sendExternalMessageCell(c)
 }
 
 main()
@@ -64,6 +64,12 @@ async function main () {
 
 main()
 ```
+
+## External dependencies
+
+- `"@apollo/client": "3.7.14"`
+- `"@eversdk/ton": "0.1.0"`
+- `"graphql": "16.6.0"`
 
 ## License
 
