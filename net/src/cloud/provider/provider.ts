@@ -16,23 +16,18 @@ interface ICloudProviderOptions {
 class CloudProvider {
     private _endpoint: string
 
-    private _projectId: string | undefined
-
     private _client: ApolloClient<NormalizedCacheObject>
 
     constructor (options: ICloudProviderOptions) {
         this._endpoint = options.endpoint
-        this._projectId = options.projectId
 
         this._client = new ApolloClient({
             cache: new InMemoryCache(),
-            uri: `${this.endpoint}/${this.projectId}/graphql`
+            uri: this.endpoint
         })
     }
 
     public get endpoint (): string { return this._endpoint }
-
-    public get projectId (): string | undefined { return this._projectId }
 
     public get client (): ApolloClient<NormalizedCacheObject> { return this._client }
 

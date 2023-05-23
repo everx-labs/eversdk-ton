@@ -18,8 +18,7 @@ import { CloudProvider } from '@eversdk/net'
 async function main () {
     // usage of https://www.evercloud.dev
     const provider = new CloudProvider({
-        endpoint: 'https://mainnet.evercloud.dev',
-        projectId: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        endpoint: 'https://mainnet.evercloud.dev/.../graphql'
     })
 
     const c = new Builder().cell()
@@ -49,8 +48,7 @@ const getBalance = apollo.graphql(`
 
 async function main () {
     const provider = new CloudProvider({
-        endpoint: 'https://mainnet.evercloud.dev',
-        projectId: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        endpoint: 'https://mainnet.evercloud.dev/.../graphql'
     })
 
     const address = '0:0000000000000000000000000000000000000000000000000000000000000000'
