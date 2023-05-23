@@ -2,9 +2,9 @@ import {
     TextEncoder,
     TextDecoder
 } from 'util'
-import type { Bit } from '../types'
-import { Cell } from 'boc'
 import nacl from 'tweetnacl'
+import type { Bit } from '../types'
+import type { Cell } from '../boc'
 
 const isNodeEnv = typeof process !== 'undefined'
     && process.versions !== undefined
@@ -122,9 +122,40 @@ const sliceIntoChunks = (arr: any[], chunkSize: number): any[] => {
     return res
 }
 
-const signCell = (cell: Cell, key: Uint8Array): Uint8Array => {
-    const hash = hexToBytes(cell.hash())
-    return nacl.sign.detached(hash, key)
+const INT32_MAX = 2147483647
+const INT32_MIN = -2147483648
+
+interface PrivateKeyWithID {
+    privateKey: Uint8Array;
+    signatureId?: number;
+}
+
+interface SignOptions extends PrivateKeyWithID {
+    cell: Cell;
+}
+
+const signCell = (options: SignOptions): Uint8Array => {
+    const { cell, privateKey, signatureId = undefined } = options
+    let hash = hexToBytes(cell.hash())
+
+    if (signatureId !== undefined) {
+        if (signatureId < INT32_MIN || signatureId > INT32_MAX) {
+            throw new Error('signCell: signatureId 32 bit integer overflow')
+        }
+
+        const ext = new Uint8Array(4 + 32)
+
+        ext[0] = (signatureId >> 24) & 0xFF
+        ext[1] = (signatureId >> 16) & 0xFF
+        ext[2] = (signatureId >> 8) & 0xFF
+        ext[3] = signatureId & 0xFF
+
+        ext.set(hash, 4)
+
+        hash = ext
+    }
+
+    return nacl.sign.detached(hash, privateKey)
 }
 
 export {
@@ -145,3 +176,5 @@ export {
     bytesToBase64,
     signCell
 }
+
+export { SignOptions, PrivateKeyWithID }

@@ -36,7 +36,7 @@ import { Address, BOC, Block, Builder, Cell, Coins, KeyPair, Slice, Utils } from
 */
 const COMPILED = 'B5EE9C7241010101003D000076FF00DDD40120F90001D0D33FD30FD74CED44D0D3FFD70B0F20A4830FA90822C8CBFFCB0FC9ED5444301046BAF2A1F823BEF2A2F910F2A3F800ED552E766412'
 
-interface PWV2Transfer {
+export interface PWV2Transfer {
     destination: Address;
     bounce:      boolean;
     value:       Coins;
@@ -45,25 +45,33 @@ interface PWV2Transfer {
     init?:       Block.StateInit;
 }
 
-interface PWV2Storage {
+export interface PWV2Storage {
     pubkey: Uint8Array;
     seqno: number;
 }
 
-class PreprocessedWalletV2 {
+export interface PWV2BuildTransferOptions {
+    transfers: PWV2Transfer[];
+    seqno: number;
+    pkwid: Utils.Helpers.PrivateKeyWithID;
+    init?: boolean;
+    timeout?: number;
+}
+
+export class PreprocessedWalletV2 {
     private _code: Cell
 
-    private _keypair: KeyPair
+    private _publicKey: Uint8Array
 
     private _init: Block.StateInit
 
     private _address: Address
 
-    constructor (keypair: KeyPair, wc = 0) {
-        this._code = BOC.fromStandard(COMPILED)
-        this._keypair = keypair
-        this._init = this.buildStateInit()
-        this._address = new Address(`${wc}:${this._init.cell.hash()}`)
+    constructor (publicKey: Uint8Array, wc = 0) {
+        this._code      = BOC.fromStandard(COMPILED)
+        this._publicKey = publicKey
+        this._init      = this.buildStateInit()
+        this._address   = new Address(`${wc}:${this._init.cell.hash()}`)
     }
 
     public get code (): Cell { return this._code }
@@ -72,11 +80,11 @@ class PreprocessedWalletV2 {
 
     public get address (): Address { return this._address }
 
-    public get keypair (): KeyPair { return this._keypair }
+    public get publicKey (): Uint8Array { return this._publicKey }
 
     private buildStateInit (): Block.StateInit {
         const data = new Builder()
-            .storeBytes(this._keypair.public)
+            .storeBytes(this._publicKey)
             .storeUint(0, 16) // seqno
 
         const stateInit = new Block.StateInit({
@@ -94,12 +102,15 @@ class PreprocessedWalletV2 {
         }
     }
 
-    public buildTransfer (
-        transfers: PWV2Transfer[],
-        seqno: number,
-        init = false,
-        timeout = 60
-    ): Block.Message {
+    public buildTransfer (options: PWV2BuildTransferOptions): Block.Message {
+        const {
+            transfers,
+            seqno,
+            pkwid,
+            init = false,
+            timeout = 60
+        } = options
+        
         const actions: Block.OutAction[] = []
 
         for (const t of transfers) {
@@ -131,7 +142,7 @@ class PreprocessedWalletV2 {
             .storeRef(outlist.cell)
             .cell()
 
-        const sign = Utils.Helpers.signCell(msgInner, this._keypair.private)
+        const sign = Utils.Helpers.signCell({ cell: msgInner, ...pkwid })
 
         const msgBody = new Builder()
             .storeBytes(sign)
@@ -147,5 +158,3 @@ class PreprocessedWalletV2 {
         })
     }
 }
-
-export { PreprocessedWalletV2 }

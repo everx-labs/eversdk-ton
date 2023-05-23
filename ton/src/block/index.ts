@@ -254,7 +254,7 @@ export class CommonMsgInfo implements BlockStruct {
                 dest: cs.loadAddress(),
                 value: cs.loadCoins()
             }
-            
+
             // TODO: support with ExtraCurrencyCollection
             cs.skipBits(1)
 
