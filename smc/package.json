@@ -38,6 +38,7 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
+    "@eversdk/ton": "0.1.0"
   },
   "types": "./dist/index.d.ts",
   "repository": {

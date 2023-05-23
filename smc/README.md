@@ -16,6 +16,10 @@
 | wallet-v4r2 support                         | ❌      |
 | multisig2 support                           | ❌      |
 
+## External dependencies
+
+- `"@eversdk/ton": "0.1.0"`
+
 ## License
 
 LGPL-3.0-or-later

@@ -19,7 +19,7 @@
     along with @eversdk/smc. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { Address, BOC, Block, Builder, Cell, Coins, KeyPair, Slice, Utils } from '@eversdk/ton'
+import { Address, BOC, Block, Builder, Cell, Coins, Slice, Utils } from '@eversdk/ton'
 
 /*
     The source code and LICENSE of the "ton-preprocessed-wallet-v2":
@@ -110,7 +110,7 @@ export class PreprocessedWalletV2 {
             init = false,
             timeout = 60
         } = options
-        
+
         const actions: Block.OutAction[] = []
 
         for (const t of transfers) {
