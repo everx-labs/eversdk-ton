@@ -17,6 +17,12 @@
     }
   ],
   "license": "MIT",
+  "files": [
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "dist"
+  ],
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.0",

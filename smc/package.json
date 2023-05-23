@@ -9,6 +9,13 @@
   },
   "author": "EverX",
   "license": "LGPL-3.0-or-later",
+  "files": [
+    "package.json",
+    "README.md",
+    "LICENSE.GPL",
+    "LICENSE.LGPL",
+    "dist"
+  ],
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.0",

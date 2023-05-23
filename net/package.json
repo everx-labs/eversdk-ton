@@ -10,6 +10,12 @@
   },
   "author": "EverX",
   "license": "MIT",
+  "files": [
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "dist"
+  ],
   "devDependencies": {
     "@graphql-codegen/cli": "^3.3.1",
     "@graphql-codegen/client-preset": "^3.0.1",
