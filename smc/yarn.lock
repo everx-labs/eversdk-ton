@@ -230,10 +230,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.41.0.tgz#080321c3b68253522f7646b55b577dd99d2950b3"
   integrity sha512-LxcyMGxwmTh2lY9FwHPGWOHmYFCZvbrFCBZL4FzSSsxsRPuhrYUg/49/0KDfW8tnIEaEHtfmn6+NPN+1DqaNmA==
 
-"@eversdk/ton@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.npmjs.org/@eversdk/ton/-/ton-0.1.0.tgz#087ca364b48a929f3ee15168c457f7cd58fd1f32"
-  integrity sha512-7l7SnxdMlutU/21H+xTRea3V4h7HKRNeJm94gVlNiHsrrmuCOcoRVutPLlbgOCDlOkvJPedKxT/ms9jM+RfzMA==
+"@eversdk/ton@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/@eversdk/ton/-/ton-0.1.1.tgz#4b153b468ef49a252547272b171defe51fb53de2"
+  integrity sha512-jj6SilqCdhNU7O6eRCYPmkHN0IokgO1ygdtrghNStVAfb2Tjh8xe9lkQwOpphTYvkXjl6G7iS9+ZFlaXARa4Dg==
   dependencies:
     "@noble/hashes" "1.1.2"
     decimal.js "10.3.1"

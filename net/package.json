@@ -1,6 +1,6 @@
 {
   "name": "@eversdk/net",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Collection of network providers for TVM Blockchains",
   "main": "./dist/index.js",
   "scripts": {
@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@apollo/client": "3.7.14",
-    "@eversdk/ton": "0.1.0",
+    "@eversdk/ton": "0.1.1",
     "graphql": "16.6.0"
   },
   "types": "./dist/index.d.ts",

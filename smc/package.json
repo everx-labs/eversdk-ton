@@ -1,6 +1,6 @@
 {
   "name": "@eversdk/smc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Commonly used tvm contracts typescript package",
   "main": "./dist/index.js",
   "scripts": {
@@ -38,7 +38,7 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "@eversdk/ton": "0.1.0"
+    "@eversdk/ton": "0.1.1"
   },
   "types": "./dist/index.d.ts",
   "repository": {

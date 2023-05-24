@@ -19,4 +19,5 @@
     along with @eversdk/smc. If not, see <https://www.gnu.org/licenses/>.
 */
 
+export { EverWallet } from './wallets/ever-wallet'
 export { PreprocessedWalletV2 } from './wallets/pwv2'

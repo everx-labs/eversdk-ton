@@ -309,7 +309,10 @@ export class Message implements BlockStruct {
 
         // body:(Either X ^X)
         if (this._data.body) {
-            if (b.bits.length + this._data.body.bits.length + 1 <= 1023) {
+            if (
+                (b.bits.length + this._data.body.bits.length + 1 <= 1023) &&
+                (b.refs.length + this._data.body.refs.length <= 4)
+            ) {
                 b.storeBit(0)
                 b.storeSlice(this._data.body.parse())
             } else {
