@@ -12,6 +12,7 @@
 | Feature                                     | Status  |
 |---------------------------------------------|-------- |
 | [ton-preprocessed-wallet-v2](https://github.com/pyAndr3w/ton-preprocessed-wallet-v2) support | ✅ |
+| [ever-wallet-contract](https://github.com/broxus/ever-wallet-contract) support | ✅ |
 | wallet-v3r2 support                         | ❌      |
 | wallet-v4r2 support                         | ❌      |
 | multisig2 support                           | ❌      |
